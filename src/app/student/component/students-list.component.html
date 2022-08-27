@@ -1,0 +1,30 @@
+<section class="content-container">
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label class="label">Фамилия</label>
+        <input class="form-control" formControlName="lastName" />
+      </div>
+      <div class="form-group">
+        <label class="label">Имя</label>
+        <input class="form-control" formControlName="firstName" />
+      </div>
+      <div class="form-group">
+        <label class="label">Отчество</label>
+        <input class="form-control" formControlName="middleName" />
+      </div>
+      <button *ngIf="mode === 'create'" (click)="addStudent()">Добавить</button>
+      <button *ngIf="mode === 'edit'">Сохранить</button>
+    </form>
+  </section>
+  <section class="students-list-container">
+    <header class="header">Список студентов</header>
+    <div *ngFor="let student of students$ | async" class="student-row">
+      <span class="fio-span">{{ student.fio }}</span>
+      <section class="button-group">
+        <button (click)="fillForm(student)">Редактировать</button>
+        <button (click)="deleteStudent(student.id)">Удалить</button>
+      </section>
+    </div>
+  </section>
+</section>
