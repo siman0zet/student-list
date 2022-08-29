@@ -1,6 +1,6 @@
 <section class="content-container">
   <section class="form-container">
-    <form [formGroup]="form">
+    <form [formGroup]="form" *ngIf="mode$ | async as mode">
       <div class="form-group">
         <label class="label">Фамилия</label>
         <input class="form-control" formControlName="lastName" />
@@ -14,15 +14,21 @@
         <input class="form-control" formControlName="middleName" />
       </div>
       <button *ngIf="mode === 'create'" (click)="addStudent()">Добавить</button>
-      <button *ngIf="mode === 'edit'">Сохранить</button>
+      <button
+        *ngIf="mode === 'edit' && (selectedStudent$ | async) as data"
+        (click)="editStudent(data)"
+      >
+        Сохранить
+      </button>
     </form>
   </section>
   <section class="students-list-container">
     <header class="header">Список студентов</header>
     <div *ngFor="let student of students$ | async" class="student-row">
-      <span class="fio-span">{{ student.fio }}</span>
+      <span class="fio-span" (click)="selectStudent(student)">{{
+        student.fio
+      }}</span>
       <section class="button-group">
-        <button (click)="fillForm(student)">Редактировать</button>
         <button (click)="deleteStudent(student.id)">Удалить</button>
       </section>
     </div>

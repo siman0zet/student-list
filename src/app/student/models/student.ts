@@ -7,6 +7,8 @@ export class Student {
   ) {}
 
   get fio(): string {
-    return `${this.lastName} ${this.firstName} ${this.middleName}`;
+    return `${this.lastName || ''} ${this.firstName || ''} ${
+      this.middleName || ''
+    }`;
   }
 }

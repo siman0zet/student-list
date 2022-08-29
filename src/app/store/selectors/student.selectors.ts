@@ -3,8 +3,13 @@ import { IStudentState } from '../reducers/student.reducers';
 
 export namespace StudentSelectors {
   const state = createFeatureSelector<IStudentState>('students');
-  export const selectStudents = createSelector(
+
+  export const students = createSelector(state, (state) => state.students);
+
+  export const selectedStudent = createSelector(
     state,
-    (state) => state.students
+    (state) => state.selectedStudent
   );
+
+  export const mode = createSelector(state, (state) => state.mode);
 }

@@ -21,4 +21,9 @@ export namespace StudentActions {
     'UPDATE_STUDENT_SUCCESS',
     props<{ students: Student[] }>()
   );
+
+  export const selectStudent = createAction(
+    'SELECT_STUDENT',
+    props<{ id: number }>()
+  );
 }

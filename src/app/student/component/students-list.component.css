@@ -50,6 +50,10 @@ body {
   width: 70%;
 }
 
+.student-row:hover {
+  background-color: blanchedalmond;
+}
+
 .student-row {
   display: flex;
   justify-content: space-between;

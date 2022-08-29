@@ -7,6 +7,6 @@ export class StudentService {
   constructor(private store$: Store) {}
 
   getAllStudents = () => {
-    return this.store$.select(StudentSelectors.selectStudents);
+    return this.store$.select(StudentSelectors.students);
   };
 }

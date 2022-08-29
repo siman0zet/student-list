@@ -13,6 +13,7 @@ import { StudentsList } from './student/component/students-list.component';
 import { StudentService } from './student/services/student.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appReducers } from './app.reducers';
+import { StudentEffects } from './store/effects/student.effects';
 
 @NgModule({
   declarations: [AppComponent, StudentsList],
@@ -27,7 +28,7 @@ import { appReducers } from './app.reducers';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([StudentEffects]),
   ],
   providers: [StudentService],
   bootstrap: [AppComponent],
