@@ -41,25 +41,18 @@ export class StudentsList implements OnInit {
     this.form.controls['middleName'].setValue(student.middleName);
   };
 
+  clearForm = () => this.form.reset();
+
   ngOnInit() {
     this.initForm();
   }
 
-  getStudentForAdd = (): Student => {
+  getNewStudent = (id: number): Student => {
     return new Student(
       this.form.controls['lastName'].value,
       this.form.controls['firstName'].value,
       this.form.controls['middleName'].value,
-      ++this.count
-    );
-  };
-
-  getStudentForEdit = (): Student => {
-    return new Student(
-      this.form.controls['lastName'].value,
-      this.form.controls['firstName'].value,
-      this.form.controls['middleName'].value,
-      ++this.count
+      id
     );
   };
 
@@ -70,13 +63,17 @@ export class StudentsList implements OnInit {
 
   editStudent = (id: number) => {
     this.store$.dispatch(
-      StudentActions.updateStudent({ student: this.getStudentForAdd(), id })
+      StudentActions.updateStudent({
+        student: this.getNewStudent(id),
+        id: id,
+      })
     );
+    this.clearForm();
   };
 
   addStudent = () =>
     this.store$.dispatch(
-      StudentActions.addStudent({ student: this.getStudentForAdd() })
+      StudentActions.addStudent({ student: this.getNewStudent(this.count++) })
     );
 
   deleteStudent = (id: number) =>

@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { studentsNode } from 'src/app/app.reducers';
 import { IStudentState } from '../reducers/student.reducers';
 
 export namespace StudentSelectors {
-  const state = createFeatureSelector<IStudentState>('students');
+  const state = createFeatureSelector<IStudentState>(studentsNode);
 
   export const students = createSelector(state, (state) => state.students);
 

@@ -8,9 +8,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { studentReducer } from './store/reducers/student.reducers';
 import { StudentsList } from './student/component/students-list.component';
-import { StudentService } from './student/services/student.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appReducers } from './app.reducers';
 import { StudentEffects } from './store/effects/student.effects';
@@ -30,7 +28,7 @@ import { StudentEffects } from './store/effects/student.effects';
     }),
     EffectsModule.forRoot([StudentEffects]),
   ],
-  providers: [StudentService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

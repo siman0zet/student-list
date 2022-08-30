@@ -15,6 +15,13 @@ export const initialState: IStudentState = {
   selectedStudent: null,
 };
 
+const getStudents = (state: IStudentState, student: Student, id: number) => {
+  const array = [...state.students];
+  const findedIndex = array.findIndex((elem) => elem.id === id);
+  array[findedIndex] = student;
+  return array;
+};
+
 export const studentReducer = createReducer(
   initialState,
   on(StudentActions.addStudent, (state, { student }) => ({
@@ -25,13 +32,15 @@ export const studentReducer = createReducer(
     ...state,
     students: [...state.students.filter((student) => student.id !== id)],
   })),
-  on(StudentActions.updateStudent, (state) => ({
+  on(StudentActions.updateStudent, (state, { student, id }) => ({
     ...state,
-    mode: 'edit',
+    mode: 'create',
+    selectedStudent: null,
+    students: getStudents(state, student, id),
   })),
   on(StudentActions.updateStudentSuccess, (state, { students }) => ({
     ...state,
-    students: students,
+    students: [...students],
     selectedStudent: null,
     mode: 'create',
   })),
