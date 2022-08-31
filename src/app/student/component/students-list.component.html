@@ -1,36 +1,76 @@
 <section class="content-container">
-  <section class="form-container">
-    <form [formGroup]="form" *ngIf="mode$ | async as mode">
-      <div class="form-group">
-        <label class="label">Фамилия</label>
-        <input class="form-control" formControlName="lastName" />
-      </div>
-      <div class="form-group">
-        <label class="label">Имя</label>
-        <input class="form-control" formControlName="firstName" />
-      </div>
-      <div class="form-group">
-        <label class="label">Отчество</label>
-        <input class="form-control" formControlName="middleName" />
-      </div>
-      <button *ngIf="mode === 'create'" (click)="addStudent()">Добавить</button>
+  <mat-card class="form-container" *ngIf="mode$ | async as mode">
+    <mat-card-title
+      >{{
+        mode === "edit" ? "Редактирование" : "Добавление"
+      }}
+      студента</mat-card-title
+    >
+    <form [formGroup]="form" class="form-group">
+      <mat-form-field appearance="standard">
+        <mat-label class="label">Фамилия</mat-label>
+        <input
+          matInput
+          class="form-control"
+          placeholder="Фамилия"
+          formControlName="lastName"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label class="label">Имя</mat-label>
+        <input
+          matInput
+          class="form-control"
+          placeholder="Имя"
+          formControlName="firstName"
+        />
+      </mat-form-field>
+      <mat-form-field class="form-group" appearance="standard">
+        <mat-label class="label">Отчество</mat-label>
+        <input
+          matInput
+          class="form-control"
+          placeholder="Отчество"
+          formControlName="middleName"
+        />
+      </mat-form-field>
+    </form>
+    <mat-card-actions>
       <button
+        mat-raised-button
+        color="accent"
+        *ngIf="mode === 'create'"
+        (click)="addStudent()"
+      >
+        Добавить
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
         *ngIf="mode === 'edit' && (selectedStudent$ | async) as data"
         (click)="editStudent(data)"
       >
         Сохранить
       </button>
-    </form>
-  </section>
-  <section class="students-list-container">
-    <header class="header">Список студентов</header>
-    <div *ngFor="let student of students$ | async" class="student-row">
-      <span class="fio-span" (click)="selectStudent(student)">{{
-        student.fio
-      }}</span>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="students-list-container">
+    <mat-card-title class="header">Список студентов</mat-card-title>
+    <mat-card-content
+      *ngFor="let student of students$ | async"
+      class="student-row"
+      (click)="selectStudent(student)"
+    >
+      <span class="fio-span">{{ student.fio }}</span>
       <section class="button-group">
-        <button (click)="deleteStudent(student.id)">Удалить</button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="deleteStudent(student.id)"
+        >
+          Удалить
+        </button>
       </section>
-    </div>
-  </section>
+    </mat-card-content>
+  </mat-card>
 </section>

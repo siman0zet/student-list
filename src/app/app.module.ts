@@ -12,6 +12,11 @@ import { StudentsList } from './student/component/students-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appReducers } from './app.reducers';
 import { StudentEffects } from './store/effects/student.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, StudentsList],
@@ -27,6 +32,11 @@ import { StudentEffects } from './store/effects/student.effects';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([StudentEffects]),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

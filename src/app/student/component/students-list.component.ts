@@ -29,9 +29,9 @@ export class StudentsList implements OnInit {
 
   initForm = () => {
     this.form = this.fb.group({
-      lastName: [null, [Validators.required]],
-      firstName: [null, [Validators.required]],
-      middleName: [null, [Validators.required]],
+      lastName: [null],
+      firstName: [null],
+      middleName: [null],
     });
   };
 
@@ -73,7 +73,7 @@ export class StudentsList implements OnInit {
 
   addStudent = () =>
     this.store$.dispatch(
-      StudentActions.addStudent({ student: this.getNewStudent(this.count++) })
+      StudentActions.addStudent({ student: this.getNewStudent(++this.count) })
     );
 
   deleteStudent = (id: number) =>
